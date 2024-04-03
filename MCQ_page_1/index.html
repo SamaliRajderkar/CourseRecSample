@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="box">
@@ -24,45 +24,58 @@
         </div>
         <div class="options-block">
           <div class="option">
-            <input type="checkbox" id="optionA" name="optionA">
-            <label for="optionA">A</label>
+            <input type="radio" id="optionA" name="domain" value="Data Science and Machine Learning">
+            <label for="optionA">Data Science and Machine Learning</label>
         </div>
           <div class="option">
-            <input type="checkbox" id="optionB" name="optionB">
-            <label for="optionB">B</label>
+            <input type="radio" id="optionB" name="domain" value="Web Development">
+            <label for="optionB">Web Development</label>
         </div>
         <div class="option">
-          <input type="checkbox" id="optionC" name="optionC">
-          <label for="optionC">C</label>
+          <input type="radio" id="optionC" name="domain" value="Cyber Security and Ethical Hacking">
+          <label for="optionC">Cyber Security and Ethical Hacking</label>
       </div>
       <div class="option">
-        <input type="checkbox" id="optionD" name="optionD">
-        <label for="optionD">D</label>
+        <input type="radio" id="optionD" name="domain" value="Artificial Intelligence and NLP">
+        <label for="optionD">Artificial Intelligence and NLP </label>
     </div>
     <div class="option">
-      <input type="checkbox" id="optionE" name="optionE">
-      <label for="optionE">E</label>
+      <input type="radio" id="optionE" name="domain" value="Programming Languages and Database">
+      <label for="optionE">Programming Languages and Database</label>
   </div>
         </div>
       </div>
       <div class="next">
-        <a href="../MCQ_page_2/index.html">Next</a>
-        
+        <a href="#" id="nextButton" style="pointer-events: none;">Next</a>
       </div>
   </div>
   <script>
-    
+    // Get references to elements
     var options = document.querySelectorAll('.option');
+    var nextButton = document.getElementById('nextButton');
 
-    
+    // Add event listener to each option
     options.forEach(function(option) {
-       
-        option.addEventListener('click', function() {
-           
-            var checkbox = option.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-        });
+      option.addEventListener('change', function() {
+        nextButton.style.pointerEvents = 'auto'; // Enable next button when option is selected
+      });
     });
-</script>
+
+    // Event listener for next button
+    document.querySelector('.next').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default behavior of anchor tag
+
+      var selectedOption = document.querySelector('input[name="domain"]:checked');
+      if (selectedOption) {
+        var selectedDomain = selectedOption.value;
+        console.log('Selected Domain:', selectedDomain);
+        sessionStorage.setItem("domain", selectedDomain);
+        // Redirect to the next page
+        window.location.href = "../MCQ_page_2/index.html";
+      } else {
+        alert('Please select a domain before proceeding.'); // Alert if no option is selected
+      }
+    });
+  </script>
 </body>
 </html>
